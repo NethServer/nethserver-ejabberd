@@ -1,0 +1,8 @@
+{
+    #
+    # 00template_vars
+    #
+    my ($name,$passwd,$gid,$members) = getgrnam('jabberadmins@'.$DomainName);
+    @jabberadmins = split(' ', $members || '');
+    '';
+}

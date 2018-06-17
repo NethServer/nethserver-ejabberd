@@ -53,8 +53,12 @@ max_fsm_queue: 1000
 acl:
   admin:
     user:
-      - "{ sprintf('^(%s)$', join('|', @jabberadmins) || 'root') }"
-
+{
+    foreach my $admin ( @jabberadmins) {
+        $admin =~ s/\@/": "/g;
+        $OUT .= "      - \"$admin\"\n";
+    }
+}
   local:
     user_regexp: ""
   loopback:
