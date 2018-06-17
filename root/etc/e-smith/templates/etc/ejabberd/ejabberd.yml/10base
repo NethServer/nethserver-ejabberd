@@ -38,7 +38,8 @@ listen:
     request_handlers:
       "/websocket": ejabberd_http_ws
       "/api": mod_http_api
-    web_admin: true
+      "/bosh": mod_bosh
+    web_admin: {((${ejabberd}{WebAdmin} || '') eq 'enabled') ? "true" : "false";}
     http_bind: true
     captcha: false
 
