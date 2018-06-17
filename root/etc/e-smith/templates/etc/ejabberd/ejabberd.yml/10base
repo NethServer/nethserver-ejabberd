@@ -33,6 +33,8 @@ listen:
     port: 5280
     ip: "::"
     module: ejabberd_http
+    certfile: 'CERTFILE'
+    tls: true
     request_handlers:
       "/websocket": ejabberd_http_ws
       "/api": mod_http_api
