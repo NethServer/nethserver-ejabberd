@@ -12,8 +12,8 @@ RestartSec=5
 Environment=EJABBERD_LOG_PATH=/var/log/ejabberd/ejabberd.log
 Environment=EJABBERD_CONFIG_PATH=/etc/ejabberd/ejabberd.yml
 Environment=HOME=/var/lib/ejabberd
-ExecStart=/bin/sh -c '/opt/ejabberd-17.08/bin/ejabberdctl start && /opt/ejabberd-17.08/bin/ejabberdctl started'
-ExecStop=/bin/sh -c '/opt/ejabberd-17.08/bin/ejabberdctl stop && /opt/ejabberd-17.08/bin/ejabberdctl stopped'
+ExecStart=/bin/sh -c '/opt/ejabberd-18.04/bin/ejabberdctl start && /opt/ejabberd-18.04/bin/ejabberdctl started'
+ExecStop=/bin/sh -c '/opt/ejabberd-18.04/bin/ejabberdctl stop && /opt/ejabberd-18.04/bin/ejabberdctl stopped'
 PrivateDevices=true
 ProtectSystem=full
 
