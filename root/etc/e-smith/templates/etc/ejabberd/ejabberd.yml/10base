@@ -24,6 +24,16 @@ listen:
     shaper: c2s_shaper
     access: c2s
   - 
+    port: 5223
+    ip: "::"
+    module: ejabberd_c2s
+    access: c2s
+    shaper: c2s_shaper
+    tls: true
+    certfile: 'CERTFILE'
+    protocol_options: 'TLSOPTS'
+    max_stanza_size: 65536
+  - 
     port: 5269
     ip: "::"
     module: ejabberd_s2s_in
