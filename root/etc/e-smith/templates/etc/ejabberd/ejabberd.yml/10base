@@ -15,7 +15,7 @@ define_macro:
 listen:
   - 
     port: 5222
-    ip: "::"
+    ip: "0.0.0.0"
     module: ejabberd_c2s
     certfile: 'CERTFILE'
     protocol_options: 'TLSOPTS'
@@ -25,7 +25,7 @@ listen:
     access: c2s
   - 
     port: 5223
-    ip: "::"
+    ip: "0.0.0.0"
     module: ejabberd_c2s
     access: c2s
     shaper: c2s_shaper
@@ -38,7 +38,7 @@ if ($ejabberd{'S2S'} eq 'enabled') {
 $OUT .= q(
   - 
     port: 5269
-    ip: "::"
+    ip: "0.0.0.0"
     module: ejabberd_s2s_in
     max_stanza_size: 131072
     shaper: s2s_shaper
@@ -50,7 +50,7 @@ $OUT .= q(
 }
   - 
     port: 5280
-    ip: "::"
+    ip: "0.0.0.0"
     module: ejabberd_http
     certfile: 'CERTFILE'
     tls: true
