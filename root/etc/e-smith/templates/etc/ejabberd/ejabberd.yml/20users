@@ -63,7 +63,18 @@
         }
     }
     $OUT .= "  mod_shared_roster_ldap:\n";
+    # Some options does not want double quote or must use brackets
     foreach $key (sort keys %config) {
-        $OUT .= "     $key: \"$config{$key}\"\n";
+        if (($key eq 'ldap_encrypt') ||
+            ($key eq 'ldap_port')) {
+
+            $OUT .= "     $key: $config{$key}\n";
+        }
+        elsif ($key eq 'ldap_servers')  {
+            $OUT .= "     $key: \[\"$config{$key}\"\]\n";
+        }
+        else {
+            $OUT .= "     $key: \"$config{$key}\"\n";
+        }
     }
 }
