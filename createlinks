@@ -65,7 +65,7 @@ templates2events("/etc/ejabberd/ejabberd.yml",  $event);
 
 $event = "group-modify";
 
-event_actions($event, 'nethserver-ejabberd-update-group' => '90');
+event_actions($event, 'nethserver-ejabberd-update-group' => '95');
 
 #--------------------------------------------------
 # actions for migration-import event
