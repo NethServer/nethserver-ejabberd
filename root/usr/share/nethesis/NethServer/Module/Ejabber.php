@@ -39,11 +39,26 @@ class Ejabber extends \Nethgui\Controller\AbstractController
     {
         parent::initialize();
         $this->declareParameter('status', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'status'));
+        $this->declareParameter('WebAdmin', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'WebAdmin'));
+        $this->declareParameter('S2S', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'S2S'));
+        $this->declareParameter('DisplayGroups', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'DisplayGroups'));
+        $this->declareParameter('shaperFast', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'shaperFast'));
+        $this->declareParameter('shaperNormal', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'shaperNormal'));
+    }
+   public function validate(\Nethgui\Controller\ValidationReportInterface $report)
+    {
+        if ( ! $this->getRequest()->isMutation()) {
+            return;
+        }
+        elseif  ($this->parameters['shaperFast'] <= $this->parameters['shaperNormal']) {
+            $report->addValidationErrorMessage($this, 'shaperFast', 'shaperFastMustBeSuperiorThanshaperNormal');
+        }
+        parent::validate($report);
     }
 
     protected function onParametersSaved($changes)
     {
-        $this->getPlatform()->signalEvent('nethserver-ejabberd-save@post-process');
+        $this->getPlatform()->signalEvent('nethserver-ejabberd-save &');
     }
 
 }
