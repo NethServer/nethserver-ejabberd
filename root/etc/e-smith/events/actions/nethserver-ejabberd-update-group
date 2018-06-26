@@ -28,7 +28,7 @@ my $event = shift || die "Event name arg missing\n";
 my $groupName = shift;
 my $errors = 0;
 
-if ($groupName ne 'jabberadmins' ) {
+if ($groupName !~ 'jabberadmins' ) {
     exit(0);
 }
 
