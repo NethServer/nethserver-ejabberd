@@ -37,6 +37,7 @@ event_actions('nethserver-ejabberd-update', qw(
 
 event_templates('nethserver-ejabberd-update', qw(
                 /etc/ejabberd/ejabberd.yml
+                /etc/ejabberd/ejabberd.cfg
                 /etc/dnsmasq.conf
 ), @certificates);
 
