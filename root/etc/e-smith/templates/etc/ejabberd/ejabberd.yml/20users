@@ -37,7 +37,7 @@
         $config{'ldap_memberattr'} = "sAMAccountName";
         $config{'ldap_memberattr_format'} =  "%u";
         $config{'ldap_useruid'} = "sAMAccountName";
-        $config{'ldap_userdesc'} = "userPrincipalName";
+        $config{'ldap_userdesc'} = "displayName";
         $config{'ldap_rfilter'} = "(objectClass=group)";
         $config{'ldap_gfilter'} = "(objectClass=user)";
         $config{'ldap_ufilter'} = "(&(objectClass=user)(sAMAccountName=%u))";
