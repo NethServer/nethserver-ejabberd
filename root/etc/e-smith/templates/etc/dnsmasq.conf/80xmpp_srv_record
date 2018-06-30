@@ -2,4 +2,5 @@
 # 80xmpp_srv_records
 #
 srv-host=_xmpp-client._tcp.{$DomainName},{$SystemName . '.' . $DomainName},5222,0,5
+srv-host=_xmpp-client._tcp.{$DomainName},{$SystemName . '.' . $DomainName},5223,0,5
 srv-host=_xmpp-server._tcp.{$DomainName},{$SystemName . '.' . $DomainName},5269,0,5
