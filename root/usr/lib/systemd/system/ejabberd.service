@@ -14,7 +14,7 @@ Environment=EJABBERD_CONFIG_PATH=/etc/ejabberd/ejabberd.yml
 Environment=HOME=/var/lib/ejabberd
 ExecStart=/bin/sh -c "/opt/ejabberd-18.06/bin/ejabberdctl start && /opt/ejabberd-18.06/bin/ejabberdctl started"
 ExecStop=/bin/sh -c "/opt/ejabberd-18.06/bin/ejabberdctl stop && /opt/ejabberd-18.06/bin/ejabberdctl stopped"
-#ExecReload=/bin/sh -c "/opt/ejabberd-18.06/bin/ejabberdctl reload_config"
+ExecReload=/bin/sh -c "/opt/ejabberd-18.06/bin/ejabberdctl reload_config"
 PrivateDevices=true
 
 
