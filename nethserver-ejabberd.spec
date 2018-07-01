@@ -41,7 +41,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/log/ejabberd
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/ejabberd
 %attr(0750,ejabberd,ejabberd) %dir %{_sysconfdir}/ejabberd
-%attr(0640,ejabberd,ejabberd) %ghost %{_sysconfdir}/ejabberd/ejabberd.cfg
+%attr(0640,ejabberd,ejabberd) %ghost %{_sysconfdir}/ejabberd/ejabberd.yml
 
 %post
 %systemd_post ejabberd.service
