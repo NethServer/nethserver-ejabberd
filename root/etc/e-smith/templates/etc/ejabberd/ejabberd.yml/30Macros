@@ -1,0 +1,6 @@
+
+define_macro:
+  'CERTFILE': "/etc/ejabberd/ejabberd.pem"
+  'TLSOPTS':
+    - "no_sslv3"
+

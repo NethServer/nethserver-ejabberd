@@ -1,0 +1,11 @@
+
+acl:
+  admin:
+    user:
+{
+    foreach my $admin ( @jabberadmins) {
+        $admin =~ s/\@/": "/g;
+        $OUT .= "      - \"$admin\"\n";
+    }
+}
+

@@ -1,0 +1,51 @@
+
+listen:
+  - 
+    port: 5222
+    ip: "0.0.0.0"
+    module: ejabberd_c2s
+    certfile: 'CERTFILE'
+    protocol_options: 'TLSOPTS'
+    starttls_required: true
+    max_stanza_size: 65536
+    shaper: c2s_shaper
+    access: c2s
+  - 
+    port: 5223
+    ip: "0.0.0.0"
+    module: ejabberd_c2s
+    access: c2s
+    shaper: c2s_shaper
+    tls: true
+    certfile: 'CERTFILE'
+    protocol_options: 'TLSOPTS'
+    max_stanza_size: 65536
+{
+if ($ejabberd{'S2S'} eq 'enabled') {
+$OUT .= q(
+  - 
+    port: 5269
+    ip: "0.0.0.0"
+    module: ejabberd_s2s_in
+    max_stanza_size: 131072
+    shaper: s2s_shaper
+    tls: true
+    certfile: 'CERTFILE'
+    protocol_options: 'TLSOPTS'
+);
+}
+}
+  - 
+    port: 5280
+    ip: "0.0.0.0"
+    module: ejabberd_http
+    certfile: 'CERTFILE'
+    tls: true
+    request_handlers:
+      "/websocket": ejabberd_http_ws
+      "/api": mod_http_api
+      "/bosh": mod_bosh
+    web_admin: {((${ejabberd}{WebAdmin} || '') eq 'enabled') ? "true" : "false";}
+    http_bind: true
+    captcha: false
+

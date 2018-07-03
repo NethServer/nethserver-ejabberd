@@ -1,0 +1,36 @@
+
+shaper:
+  normal: {${ejabberd}{'shaperNormal'} || '500000';}
+  fast: {${ejabberd}{'shaperFast'} || '1000000';}
+
+max_fsm_queue: 1000
+
+shaper_rules:
+  max_user_sessions: 10
+  max_user_offline_messages:
+    - 5000: admin
+    - 100
+  c2s_shaper:
+    - none: admin
+    - normal
+  s2s_shaper: fast
+
+access_rules:
+  local:
+    - allow: local
+  c2s:
+    - deny: blocked
+    - allow
+  announce:
+    - allow: admin
+  configure:
+    - allow: admin
+  muc_create:
+    - allow: local
+  pubsub_createnode:
+    - allow: local
+  register:
+    - deny
+  trusted_network:
+    - allow: loopback
+
