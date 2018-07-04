@@ -60,13 +60,13 @@ templates2events("/etc/ejabberd/ejabberd.yml",  $event);
 
 
 #--------------------------------------------------
-# actions for group-modify event
+# actions for group-modify group-create group-delete event
 # Restart ejabberd on jabberadmins group update
 #--------------------------------------------------
 
-$event = "group-modify";
-
+foreach $event (qw (group-modify group-create group-delete)){
 event_actions($event, 'nethserver-ejabberd-update-group' => '95');
+}
 
 #--------------------------------------------------
 # actions for migration-import event
