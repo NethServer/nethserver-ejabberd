@@ -1,10 +1,13 @@
 
+# Define global certificate (introduced 17.11)
+certfiles:
+    - 'CERTFILE'
+
 listen:
   - 
     port: 5222
     ip: "0.0.0.0"
     module: ejabberd_c2s
-    certfile: 'CERTFILE'
     protocol_options: 'TLSOPTS'
     starttls_required: true
     max_stanza_size: 65536
@@ -17,7 +20,6 @@ listen:
     access: c2s
     shaper: c2s_shaper
     tls: true
-    certfile: 'CERTFILE'
     protocol_options: 'TLSOPTS'
     max_stanza_size: 65536
 {
@@ -30,7 +32,6 @@ $OUT .= q(
     max_stanza_size: 131072
     shaper: s2s_shaper
     tls: true
-    certfile: 'CERTFILE'
     protocol_options: 'TLSOPTS'
 );
 }
@@ -39,7 +40,6 @@ $OUT .= q(
     port: 5280
     ip: "0.0.0.0"
     module: ejabberd_http
-    certfile: 'CERTFILE'
     tls: true
     request_handlers:
       "/websocket": ejabberd_http_ws
