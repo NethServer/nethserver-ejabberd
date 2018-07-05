@@ -22,20 +22,6 @@ listen:
     tls: true
     protocol_options: 'TLSOPTS'
     max_stanza_size: 65536
-{
-if ($ejabberd{'S2S'} eq 'enabled') {
-$OUT .= q(
-  - 
-    port: 5269
-    ip: "0.0.0.0"
-    module: ejabberd_s2s_in
-    max_stanza_size: 131072
-    shaper: s2s_shaper
-    tls: true
-    protocol_options: 'TLSOPTS'
-);
-}
-}
   - 
     port: 5280
     ip: "0.0.0.0"
@@ -49,3 +35,19 @@ $OUT .= q(
     http_bind: true
     captcha: false
 
+{
+if ($ejabberd{'S2S'} eq 'enabled') {
+$OUT .= q(
+  - 
+    port: 5269
+    ip: "0.0.0.0"
+    module: ejabberd_s2s_in
+    max_stanza_size: 131072
+    shaper: s2s_shaper
+    tls: true
+    protocol_options: 'TLSOPTS'
+
+s2s_use_starttls: required
+);
+}
+}
