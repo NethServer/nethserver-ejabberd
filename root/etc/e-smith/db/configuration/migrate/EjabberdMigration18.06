@@ -1,0 +1,17 @@
+{
+    # This migrate fragment is for the upgrade from 16.01 to 18.06
+
+    use esmith::ConfigDB;
+    my $db = esmith::ConfigDB->open() || die "Can't open config database: $!\n";
+
+    # Props no more used
+    my $WelcomeSubject = $db->get_prop_and_delete('ejabberd','WelcomeSubject');
+    my $WelComeText = $db->get_prop_and_delete('ejabberd','WelComeText');
+    my $XMPPAccess = $db->get_prop_and_delete('ejabberd','XMPPAccess');
+
+    # Add the S2S port if not existing
+    my $TCP = $db->get_prop('ejabberd','TCPPorts') || '';
+    if ($TCP !~ '5269') {
+        $db->set_prop('ejabberd','TCPPorts', '5222,5223,5269,5280');
+    }
+}
