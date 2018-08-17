@@ -14,10 +14,16 @@ modules:
   mod_disco: \{\}
   mod_bosh: \{\}
   mod_last: \{\}
+{
+if ($ejabberd{ModMamStatus} eq 'enabled'){
+    $OUT .= q(
   mod_mam:
     db_type: mnesia
     use_cache: true
     default: always
+);
+}
+}
   mod_muc:
     access:
       - allow
