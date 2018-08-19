@@ -20,6 +20,17 @@ echo $view->panel()
                 ->insert($view->checkbox('S2S', 'enabled')->setAttribute('uncheckedValue', 'disabled'))
                 ->insert($view->textInput('ShaperFast'))
                 ->insert($view->textInput('ShaperNormal'))
+
+            )
+        )
+
+        ->insert($view->fieldset(NULL, $view::FIELDSET_EXPANDABLE)->setAttribute('template', $T('Modules_label'))
+            ->insert($view->elementList()
+                ->insert($view->fieldsetSwitch('ModMamStatus', 'enabled', $view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
+                    ->insert($view->fieldsetSwitch('ModMamPurgeDBStatus', 'enabled', $view::FIELDSETSWITCH_CHECKBOX | $view::FIELDSETSWITCH_EXPANDABLE)->setAttribute('uncheckedValue', 'disabled')
+                         ->insert($view->textInput('ModMamPurgeDBInterval'))
+                    )
+                )
             )
         )
 );

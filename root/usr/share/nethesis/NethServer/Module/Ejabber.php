@@ -43,6 +43,9 @@ class Ejabber extends \Nethgui\Controller\AbstractController
         $this->declareParameter('S2S', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'S2S'));
         $this->declareParameter('ShaperFast', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'ShaperFast'));
         $this->declareParameter('ShaperNormal', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'ShaperNormal'));
+        $this->declareParameter('ModMamPurgeDBStatus', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'ModMamPurgeDBStatus'));
+        $this->declareParameter('ModMamStatus', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'ModMamStatus'));
+        $this->declareParameter('ModMamPurgeDBInterval', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'ModMamPurgeDBInterval'));
     }
 
     public function validate(\Nethgui\Controller\ValidationReportInterface $report)
