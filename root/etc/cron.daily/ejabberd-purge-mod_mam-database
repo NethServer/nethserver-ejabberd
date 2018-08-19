@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+#
+# Purge old messages of mod_mam
+#
+status=$(/usr/sbin/e-smith/db configuration getprop ejabberd ModMamStatus)
+purgestatus=$(/usr/sbin/e-smith/db configuration getprop ejabberd ModMamPurgeDBStatus)
+interval=$(/usr/sbin/e-smith/db configuration getprop ejabberd ModMamPurgeDBInterval)
+
+if [[ $status == 'enabled' ]] && [[ $purgestatus == 'enabled' ]]; then
+    /opt/ejabberd-*/bin/ejabberdctl delete_old_mam_messages all ${interval:-30}
+fi
