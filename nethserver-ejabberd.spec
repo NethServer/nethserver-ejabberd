@@ -32,6 +32,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_localstatedir}/log/ejabberd
 mkdir -p %{buildroot}/%{_sysconfdir}/ejabberd
 mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
+mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 
 %files -f %{name}-%{version}-%{release}-filelist 
 %defattr(-,root,root)
@@ -43,6 +44,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 %attr(0750,ejabberd,ejabberd) %dir %{_sysconfdir}/ejabberd
 %attr(0640,ejabberd,ejabberd) %ghost %{_sysconfdir}/ejabberd/ejabberd.yml
 %attr(0640,ejabberd,ejabberd) %{_sysconfdir}/ejabberd/inetrc
+%attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/nethserver/ejabberd
 
 %post
 %systemd_post ejabberd.service
