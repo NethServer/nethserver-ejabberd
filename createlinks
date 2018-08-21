@@ -84,3 +84,20 @@ event_services('certificate-update', qw(
                ejabberd restart
 ));
 
+
+#--------------------------------------------------
+# actions for pre-backup-data event
+#--------------------------------------------------
+
+$event = 'pre-backup-data';
+
+event_actions($event, 'nethserver-ejabberd-backup' => 50);
+
+#--------------------------------------------------
+# actions for post-restore-data event
+#--------------------------------------------------
+
+$event = 'post-restore-data';
+
+event_actions($event, 'nethserver-ejabberd-restore' => 50);
+event_services($event, 'ejabberd' => 'restart');
