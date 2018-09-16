@@ -4,6 +4,7 @@ define_macro:
   'TLSOPTS':
     - "no_sslv3"
 {
+my $tlsPolicy = $tls{'policy'} || '0';
 $OUT .=q(    - "no_tlsv1"
-    - "no_tlsv1_1") if ($tls{'policy'} >= 20180621);
+    - "no_tlsv1_1") if ($tlsPolicy >= 20180621);
 }
