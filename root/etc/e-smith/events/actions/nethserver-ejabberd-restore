@@ -22,17 +22,14 @@
 
 # Test if the service is running before to restore
 /usr/bin/systemctl is-active --quiet ejabberd
-
-if [[ $? -eq 0 ]]; then
-    if [ -f /var/lib/nethserver/ejabberd/ejabberd.backup ]; then
-        /opt/ejabberd-*/bin/ejabberdctl install_fallback /var/lib/nethserver/ejabberd/ejabberd.backup >/dev/null
-    else
-        echo 'The backup file is not available, restore is not possible'
-        exit 0
-    fi
-fi
-
-if [[ $? -ne 0 ]]; then
-    echo 'Ejabberd is not running, restore is not possible'
+if [[ $? != 0 ]]; then
+    echo '[WARNING] Ejabberd is not running, restore is not possible'
     exit 0
 fi
+
+if ! [[ -f /var/lib/nethserver/ejabberd/ejabberd.backup ]]; then
+    echo '[WARNING] The backup file is not available'
+    exit 0
+fi
+
+/opt/ejabberd-*/bin/ejabberdctl install_fallback /var/lib/nethserver/ejabberd/ejabberd.backup >/dev/null

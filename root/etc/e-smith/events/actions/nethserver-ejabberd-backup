@@ -22,11 +22,9 @@
 
 # Test if the service is running before to backup
 /usr/bin/systemctl is-active --quiet ejabberd
-if [[ $? -eq 0 ]]; then
-    /opt/ejabberd-*/bin/ejabberdctl backup /var/lib/nethserver/ejabberd/ejabberd.backup
-fi
-
-if [[ $? -ne 0 ]]; then
-    echo 'Ejabberd is not running, backup is not possible'
+if [[ $? != 0 ]]; then
+    echo '[WARNING] Ejabberd is not running, backup is not possible'
     exit 0
 fi
+
+/opt/ejabberd-*/bin/ejabberdctl backup /var/lib/nethserver/ejabberd/ejabberd.backup
