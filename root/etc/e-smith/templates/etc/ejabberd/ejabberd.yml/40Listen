@@ -9,16 +9,16 @@ listen:
     ip: "0.0.0.0"
     module: ejabberd_c2s
     protocol_options: 'TLSOPTS'
-{
-my $tlsPolicy = $tls{'policy'} || '0';
-$OUT .= q(    ciphers: "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256"
-    tls_compression: false)  if ($tlsPolicy >= 20181001);
-}
     starttls: true
     starttls_required: true
     max_stanza_size: 65536
     shaper: c2s_shaper
     access: c2s
+{
+my $tlsPolicy = $tls{'policy'} || '0';
+$OUT .= q(    ciphers: "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256"
+    tls_compression: false)  if ($tlsPolicy >= 20181001);
+}
   - 
     port: 5223
     ip: "0.0.0.0"
@@ -40,11 +40,9 @@ $OUT .= q(    ciphers: "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA38
     web_admin: {((${ejabberd}{WebAdmin} || '') eq 'enabled') ? "true" : "false";}
     http_bind: true
     captcha: false
-
 {
 if ($ejabberd{'S2S'} eq 'enabled') {
-$OUT .= q(
-  - 
+$OUT .= q(  - 
     port: 5269
     ip: "0.0.0.0"
     module: ejabberd_s2s_in
@@ -57,4 +55,5 @@ $OUT .= q(
     tls_compression: false)  if ($tlsPolicy >= 20181001);
 }
 }
+
 s2s_use_starttls: required
