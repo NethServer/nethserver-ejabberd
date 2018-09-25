@@ -6,5 +6,5 @@ define_macro:
 {
 my $tlsPolicy = $tls{'policy'} || '0';
 $OUT .=q(    - "no_tlsv1"
-    - "no_tlsv1_1") if ($tlsPolicy >= 20181001);
+    - "cipher_server_preference") if ($tlsPolicy >= 20181001);
 }
