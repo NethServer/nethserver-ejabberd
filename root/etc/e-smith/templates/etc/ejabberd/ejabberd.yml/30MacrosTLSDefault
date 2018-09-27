@@ -4,11 +4,15 @@ my $tlsPolicy = $tls{'policy'} || '';
 
 if ($tlsPolicy eq '') {
     $OUT .=q(
+#
+# TLS policy default
+#
+
 define_macro:
   'CERTFILE': "/etc/ejabberd/ejabberd.pem"
   'TLSOPTS':
     - "no_sslv3"
-  'CIPHERS':
+  'CIPHERS': null
 );
 }
 }
