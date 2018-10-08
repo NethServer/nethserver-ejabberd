@@ -12,8 +12,10 @@ if (($tlsPolicy == 0 ) ||
 
 define_macro:
   'CERTFILE': "/etc/ejabberd/ejabberd.pem"
-  'TLSOPTS': "no_sslv3"
-  'CIPHERS': null
+  'TLSOPTS':
+    - "no_sslv3"
+  'CIPHERS':
+    - ""
 );
 }
 }
