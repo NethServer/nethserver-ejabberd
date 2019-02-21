@@ -16,7 +16,7 @@
         // get stats
         nethserver.exec(
             ["nethserver-ejabberd/read"],
-            null,
+            {sections:["status", "configuration"]},
             null,
             function (success) {
                 try {
@@ -57,7 +57,7 @@
             $('#config-loader').hide();
             nethserver.exec(
                 ["nethserver-ejabberd/read"],
-                null,
+                {sections:["configuration"]},
                 null,
                 function (success) {
                     $('#loader').hide();

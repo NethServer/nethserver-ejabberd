@@ -22,15 +22,22 @@
 
 ejabberdctl="/opt/ejabberd-18.06/bin/ejabberdctl"
 
-configuration="$(/sbin/e-smith/config getjson ejabberd)"
+configuration="{}"
+status="{}"
 
-registered="$($ejabberdctl stats registeredusers)"
-online="$($ejabberdctl stats onlineusers)"
-uptime="$($ejabberdctl stats uptimeseconds)"
-s2sout="$($ejabberdctl outgoing_s2s_number)"
-s2sin="$($ejabberdctl incoming_s2s_number)"
-status="$(printf '{"registered":%d,"online":%d,"uptime":%d,"s2sin":%d,"s2sout":%d}' "${registered:-0}" "${online:-0}" "${uptime:-0}" "${s2sin:-0}" "${s2sout:-0}")"
+for action in $(jq -r '.sections[]' -); do
+    if [[ $action == 'configuration' ]]; then
+        configuration="$(/sbin/e-smith/config getjson ejabberd)"
+    elif [[ $action == 'status' ]]; then
+        registered="$($ejabberdctl stats registeredusers)"
+        online="$($ejabberdctl stats onlineusers)"
+        uptime="$($ejabberdctl stats uptimeseconds)"
+        s2sout="$($ejabberdctl outgoing_s2s_number)"
+        s2sin="$($ejabberdctl incoming_s2s_number)"
+        status="$(printf '{"registered":%d,"online":%d,"uptime":%d,"s2sin":%d,"s2sout":%d}' "${registered:-0}" "${online:-0}" "${uptime:-0}" "${s2sin:-0}" "${s2sout:-0}")"
+    fi
+done
 
-printf '{"configuration":%s,"status":%s}' "${configuration:-\{\}}" "${status:-\{\}}"
+printf '{"configuration":%s,"status":%s}' "${configuration}" "${status}"
 
 
