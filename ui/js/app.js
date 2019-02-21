@@ -123,9 +123,10 @@
                     nethserver.exec(
                         ["nethserver-ejabberd/update"],
                         data,
-                        null,
+                        function (stream) {
+                            console.info("nethserver-ejabberd", stream);
+                        },
                         function (success) {
-                            $('#config-loader').hide()
                             doRead();
                         },
                         function (error) {

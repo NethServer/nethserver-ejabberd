@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+
+#
+# Copyright (C) 2019 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+use strict;
+use esmith::ConfigDB;
+use esmith::event;
+use JSON;
+
+require '/usr/libexec/nethserver/api/lib/helper_functions.pl';
+
+my $cdb = esmith::ConfigDB->open() || die("Could not open ConfigDB");
+my $data = readInput();
+
+if(defined $data->{'configuration'}->{'props'} ) {
+    $data = $data->{'configuration'}->{'props'};
+} else {
+    error("InputError", "update_action_input_error", 1550763311);
+}
+
+foreach my $prop (qw(
+    status
+    WebAdmin
+    S2S
+    ModMamStatus
+    ModMamPurgeDBStatus
+    ModMamPurgeDBInterval
+    ShaperFast
+    ShaperNormal
+)) {
+    $cdb->set_prop('ejabberd', $prop, $data->{$prop});
+}
+
+esmith::event::set_json_log(1);
+
+my $success = esmith::event::event_signal('nethserver-ejabberd-save');
+if($success) {
+    success();
+} else {
+    error("EventError", "update_action_failed", 1550763312);
+}
