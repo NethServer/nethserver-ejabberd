@@ -2,7 +2,12 @@
 
 <div id="loader" class="spinner spinner-lg"></div>
 <div id="content">
-    <form class="form-horizontal" role="form">
+    <div class="alert alert-danger" id="validation-error-notification">
+        <span class="pficon pficon-error-circle-o"></span>
+        <strong i18n="validation_error_title">Form validation error!</strong> <span i18n="validation_error_description">The form values cannot be saved: check the input fields values for correctness.</span>
+    </div>
+    
+    <form class="form-horizontal" role="form" id="config-form">
         
         <div class="form-group">
             <label class="col-sm-2 control-label" for="config-service-switch" i18n="configuration_service_switch_label">
@@ -62,8 +67,11 @@
                                 <span i18n="configuration_retention_label">Clean messages older than</span>
                              </label>
                         </span>
-                        <input class="bootstrap-touchspin inline" id="config-retention-value" type="text" value="" >
+                        <input class="bootstrap-touchspin inline" id="config-retention-value" type="text" value="" required="required">
                     </div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <span id="config-retention-value-error" class="help-block"></span>
                 </div>
             </div>
             
@@ -72,20 +80,29 @@
             </div>
 
             <div class="form-group hidden">
-              <label class="col-sm-2 control-label" for="config-shaperfast-text" i18n="configuration_shaperfast_label">Maximum speed</label>
-              <div class="col-sm-2">
-                <input type="text" id="config-shaperfast-text" class="form-control"></div>
+                <label class="col-sm-2 control-label" for="config-shaperfast-text" i18n="configuration_shaperfast_label">Maximum speed</label>
+                <div class="col-sm-2">
+                    <input type="text" id="config-shaperfast-text" class="form-control" required="required">
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <span id="config-shaperfast-text-error" class="help-block"></span>
+                </div>
             </div>
             <div class="form-group hidden">
-              <label class="col-sm-2 control-label" for="config-shapernormal-text" i18n="configuration_shapernormal_label">Normal speed</label>
-              <div class="col-sm-2">
-                <input type="text" id="config-shapernormal-text" class="form-control"></div>
+                <label class="col-sm-2 control-label" for="config-shapernormal-text" i18n="configuration_shapernormal_label">Normal speed</label>
+                <div class="col-sm-2">
+                    <input type="text" id="config-shapernormal-text" class="form-control" required="required">
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <span id="config-shapernormal-text-error" class="help-block"></span>
+                </div>
             </div>
         </fieldset>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-primary" type="submit" i18n="configuration_submit_btn">Save</button>
+                <span id="config-loader" class="spinner spinner-sm hidden"></span>
             </div>
         </div>
       </form>

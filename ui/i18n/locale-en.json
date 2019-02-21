@@ -28,5 +28,13 @@
     "configuration_shaper_title": "File transfer speed (bytes/second)",
     "configuration_retention_days": "days",
     "configuration_submit_btn": "Save",
+    "configuration_submit_success": "Ejabberd configuration was saved successfully",
+    "configuration_submit_error": "An error has occurred while applying the saved Ejabberd configuration",
+    "valid_integer": "Must be a positive integer number",
+    "valid_positive": "Must be a positive integer number",
+    "valid_shaper_limits": "Must be greater than the Normal speed value",
+    "validation_error_title": "Form validation error!",
+    "validation_error_description": "The form values cannot be saved: check the input fields values for correctness.",
     "logs_follow_btn": "Follow"
+    
 }

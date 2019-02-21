@@ -1,0 +1,48 @@
+#!/usr/bin/php
+<?php
+/*
+ * Copyright (C) 2018 Nethesis S.r.l.
+ * http://www.nethesis.it - nethserver@nethesis.it
+ *
+ * This script is part of NethServer.
+ *
+ * NethServer is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License,
+ * or any later version.
+ *
+ * NethServer is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with NethServer.  If not, see COPYING.
+*/
+
+require_once("/usr/libexec/nethserver/api/lib/Helpers.php");
+
+$data = readInput();
+$p = $data['configuration']['props'];
+
+$v = createValidator($p)
+    ->declareParameter('status', Validate::SERVICESTATUS)
+    ->declareParameter('WebAdmin', Validate::SERVICESTATUS)
+    ->declareParameter('S2S', Validate::SERVICESTATUS)
+    ->declareParameter('ShaperFast', Validate::POSITIVE_INTEGER)
+    ->declareParameter('ShaperNormal', Validate::POSITIVE_INTEGER)
+    ->declareParameter('ModMamPurgeDBStatus', Validate::SERVICESTATUS)
+    ->declareParameter('ModMamStatus', Validate::SERVICESTATUS)
+    ->declareParameter('ModMamPurgeDBInterval', Validate::POSITIVE_INTEGER)
+;
+
+if(intval($p['ShaperFast']) > 0 && intval($p['ShaperNormal']) > 0 && $p['ShaperFast'] <= $p['ShaperNormal']) {
+    $v->addValidationError('ShaperFast', 'valid_shaper_limits', $p['ShaperFast']);
+}
+
+# Validate the input
+if ($v->validate()) {
+    success();
+} else {
+    error($v);
+}

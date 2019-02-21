@@ -51,10 +51,118 @@
 
     } // end getDashboard
 
-
     function getConfiguration() {
+        
+        function doRead() {
+            $('#config-loader').hide();
+            nethserver.exec(
+                ["nethserver-ejabberd/read"],
+                null,
+                null,
+                function (success) {
+                    $('#loader').hide();
+                    try {
+                        var data = JSON.parse(success);
+
+                        var serviceStatus = data['configuration']['props']['status'] == 'enabled';
+                        var webAdminStatus = data['configuration']['props']['WebAdmin'] == 'enabled';
+                        var s2sStatus = data['configuration']['props']['S2S'] == 'enabled';
+                        var modMamStatus = data['configuration']['props']['ModMamStatus'] == 'enabled';
+                        var retentionStatus = data['configuration']['props']['ModMamPurgeDBStatus'] == 'enabled';
+
+                        $('#config-service-switch').attr('checked', serviceStatus).trigger('change');
+                        $('#config-webadmin-switch').attr('checked', webAdminStatus).trigger('change');
+                        $('#config-federation-switch').attr('checked', s2sStatus).trigger('change');
+                        $('#config-archive-switch').attr('checked', modMamStatus).trigger('change');
+                        $('#config-retention-switch').attr('checked', retentionStatus).trigger('change');
+
+                        $('#config-shaperfast-text').val(data['configuration']['props']['ShaperFast']);
+                        $('#config-shapernormal-text').val(data['configuration']['props']['ShaperNormal']);
+                        $('#config-retention-value').val(data['configuration']['props']['ModMamPurgeDBInterval']);
+
+                    } catch (e) {
+                        console.error(e);
+                    }
+                    $('#content').show();
+                },
+                function (error) {
+                    console.error(error);
+                    $('#loader').hide();
+                    $('#content').show();
+                }
+            );
+        }
+        
+        function doUpdate() {
+            $('#config-loader').show();
+            $('.form-group .help-block').hide();
+            $('.form-group').removeClass('has-error');
+            $('#validation-error-notification').hide();
+            
+            var data = {"configuration":{"props":{
+                "status": $("#config-service-switch").is(':checked') ? 'enabled' : 'disabled',
+                "WebAdmin": $("#config-webadmin-switch").is(':checked') ? 'enabled' : 'disabled',
+                "S2S": $("#config-federation-switch").is(':checked') ? 'enabled' : 'disabled',
+                "ModMamStatus": $("#config-archive-switch").is(':checked') ? 'enabled' : 'disabled',
+                "ModMamPurgeDBStatus": $("#config-retention-switch").is(':checked') ? 'enabled' : 'disabled',
+                "ModMamPurgeDBInterval": $("#config-retention-value").val(),
+                "ShaperFast": $("#config-shaperfast-text").val(),
+                "ShaperNormal": $("#config-shapernormal-text").val(),
+            }}};
+
+            nethserver.exec(
+                ["nethserver-ejabberd/validate"],
+                data,
+                null,
+                function (success) {
+                    // define notifications
+                    nethserver.notifications.success = _("configuration_submit_success");
+                    nethserver.notifications.error = _("configuration_submit_error");
+
+                    // update values
+                    nethserver.exec(
+                        ["nethserver-ejabberd/update"],
+                        data,
+                        null,
+                        function (success) {
+                            $('#config-loader').hide()
+                            doRead();
+                        },
+                        function (error) {
+                            $('#config-loader').hide()
+                            console.error(error);
+                        }
+                    );
+                },
+                function (error, data) {
+                    $('#config-loader').hide();
+                    $('#validation-error-notification').show();
+                    var errorData = {};
+                    try {
+                        errorData = JSON.parse(data);
+                        for (var i in errorData.attributes) {
+                            var attr = errorData.attributes[i];
+                            var id = '';
+                            if(attr.parameter == 'ShaperFast') {
+                                id = 'config-shaperfast-text';
+                            } else if (attr.parameter == 'ShaperNormal') {
+                                id = 'config-shapernormal-text';
+                            } else if (attr.parameter == 'ModMamPurgeDBInterval') {
+                                id = 'config-retention-value';
+                            }
+                            $('#' + id).closest('.form-group').addClass('has-error');
+                            $('#' + id + '-error').text(_(attr.error)).show();
+                        }
+                    } catch (e) {
+                        console.error(e)
+                    }
+                }
+            );
+        }
+
         $('#loader').show();
         $('#content').hide();
+        $('#validation-error-notification').hide();
         applyTranslations();
 
         $(".bootstrap-switch").bootstrapSwitch({
@@ -63,9 +171,10 @@
         });
         
         $(".bootstrap-touchspin").TouchSpin({
-            min: 1,
+            min: 0,
             max: 9999,
-            postfix: _('configuration_retention_days')
+            postfix: _('configuration_retention_days'),
+            forcestepdivisibility: 'none'
         });
 
         // set default state to collapsed for expandable field section
@@ -108,104 +217,13 @@
         var webadminUrl = 'https://' + window.location.hostname + ':5280/admin/';
         $('#configuration-webadmin-url').text(webadminUrl).attr('href', webadminUrl);
 
-        nethserver.exec(
-            ["nethserver-ejabberd/read"],
-            null,
-            null,
-            function (success) {
-                $('#loader').hide();
-                try {
-                    var data = JSON.parse(success);
-
-                    var serviceStatus = data['configuration']['props']['status'] == 'enabled';
-                    var webAdminStatus = data['configuration']['props']['WebAdmin'] == 'enabled';
-                    var s2sStatus = data['configuration']['props']['S2S'] == 'enabled';
-                    var modMamStatus = data['configuration']['props']['ModMamStatus'] == 'enabled';
-                    var retentionStatus = data['configuration']['props']['ModMamPurgeDBStatus'] == 'enabled';
-
-                    $('#config-service-switch').attr('checked', serviceStatus).trigger('change');
-                    $('#config-webadmin-switch').attr('checked', webAdminStatus).trigger('change');
-                    $('#config-federation-switch').attr('checked', s2sStatus).trigger('change');
-                    $('#config-archive-switch').attr('checked', modMamStatus).trigger('change');
-                    $('#config-retention-switch').attr('checked', retentionStatus).trigger('change');
-
-                    $('#config-shaperfast-text').val(data['configuration']['props']['ShaperFast']);
-                    $('#config-shapernormal-text').val(data['configuration']['props']['ShaperNormal']);
-                    $('#config-retention-value').val(data['configuration']['props']['ModMamPurgeDBInterval']);
-
-                } catch (e) {
-                    console.error(e);
-                }
-                $('#content').show();
-            },
-            function (error) {
-                console.error(error);
-                $('#loader').hide();
-                $('#content').show();
-            }
-        );
-
-        $('#config-form').submit(function (event) {
+        $('#config-form').submit(function(event){
             event.preventDefault();
-
-            $('#config-loader').show()
-
-            // get values
-            var status = $('#config-status').prop("checked") == true ? 'enabled' : 'disabled'
-            var VirtualHost = $('#config-VirtualHost').val()
-
-            // create obj
-            var configObj = {
-                "props": {
-                    "status": status,
-                    "VirtualHost": VirtualHost,
-                },
-                "name": "ejabberd",
-            }
-
-            // validate obj
-            nethserver.exec(
-                ["nethserver-ejabberd/validate"],
-                configObj,
-                null,
-                function (success) {
-                    // define notifications
-                    nethserver.notifications.success = _("configuration_ok")
-                    nethserver.notifications.error = _("configuration_error")
-
-                    // update values
-                    nethserver.exec(
-                        ["nethserver-ejabberd/update"],
-                        configObj,
-                        function (stream) {
-                            console.info("nethserver-ejabberd", stream);
-                        },
-                        function (success) {
-                            $('#config-loader').hide()
-                            getConfig()
-                        },
-                        function (error) {
-                            $('#config-loader').hide()
-                            console.error(error);
-                        }
-                    );
-                },
-                function (error, data) {
-                    $('#config-loader').hide()
-                    var errorData = {};
-                    try {
-                        errorData = JSON.parse(data);
-                        for (var e in errorData.attributes) {
-                            var attr = errorData.attributes[e]
-                            $('#group-' + attr.parameter).addClass('has-error')
-                            $('#error-' + attr.parameter).show()
-                        }
-                    } catch (e) {
-                        console.error(e)
-                    }
-                }
-            );
+            event.stopPropagation();
+            doUpdate();
         });
+
+        doRead();
     } // end getConfiguration function
 
     function getLogs() {
