@@ -1,13 +1,13 @@
 {
     "id": "nethserver-ejabberd",
-    "name": "NethServer Ejabberd",
-    "summary": "NethServer ejabberd XMPP server",
-    "description": "NethServer configuration of ejabberd XMPP server",
-    "url": "nethserver-ejabberd",
+    "name": "Ejabberd",
+    "summary": "Ejabberd XMPP server configuration for NethServer",
+    "description": "Ejabberd XMPP server configuration for NethServer",
+    "url": "",
     "homepage": "https://github.com/NethServer/nethserver-ejabberd",
     "provides": ["nethserver-ejabberd"],
     "release": {
-        "version": "1.3.1"
+        "version": "1.0.0"
     },
     "tags": ["team", "chat", "xmpp", "ejabberd", "irc"],
     "license": "GPL",
@@ -19,5 +19,5 @@
         "url": "https://github.com/NethServer/nethserver-ejabberd",
         "email": "security@nethserver.org"
     },
-    "icon": "icon.png"
+    "icon": "logo.png"
 }

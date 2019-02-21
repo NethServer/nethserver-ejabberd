@@ -1,7 +1,29 @@
-<h1 i18n="about">About</h1>
+<h2 i18n="menu_about">About</h2>
 
-<script>
-    $('[i18n]').each(function () {
-        $(this).text(_($(this).attr('i18n')))
-    });
-</script>
+<div id="loader" class="spinner"></div>
+<div id="content">
+    <img class="logo" src="logo.png">
+    <h2 id="app-name"></h2>
+    <h3 id="app-summary"></h3>
+
+
+    <div class="list-group-item info-item">
+        <span class="fa fa-code m-right-sm"></span>
+        <strong id="app-version"></strong>
+    </div>
+
+    <div class="list-group-item info-item">
+        <span class="fa fa-globe m-right-sm"></span>
+        <a id="app-web" target="_blank" href="https://github.com/NethServer/nethserver-ejabberd" i18n="website">Website</a>
+    </div>
+
+    <div class="list-group-item info-item">
+        <span class="fa fa-bug m-right-sm"></span>
+        <a id="app-bug" target="_blank" href="https://github.com/NethServer/dev/issues" i18n="bug_tracker">Bug tracker</a>
+    </div>
+
+    <div class="list-group-item info-item">
+        <span class="fa fa-user m-right-sm"></span>
+        <span id="app-author"></span>
+    </div>
+</div>

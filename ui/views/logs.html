@@ -1,7 +1,7 @@
-<h1 i18n="logs">Logs</h1>
-
-<script>
-    $('[i18n]').each(function () {
-        $(this).text(_($(this).attr('i18n')))
-    });
-</script>
+<h2 i18n="menu_logs">Logs</h2>
+<h3>
+    <pre id="log-file" class="monospace">journalctl -u ejabberd</pre>
+    <button id="follow-btn" i18n="follow" class="btn btn-primary">Follow</button>
+</h3>
+<div id="loader" class="spinner"></div>
+<pre id="logs-output" class="logs"></pre>

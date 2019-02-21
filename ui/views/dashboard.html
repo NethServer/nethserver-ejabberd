@@ -1,7 +1,53 @@
-<h1 i18n="dashboard">Dashboard</h1>
+<h1 i18n="menu_dashboard">Dashboard</h1>
 
-<script>
-    $('[i18n]').each(function () {
-        $(this).text(_($(this).attr('i18n')))
-    });
-</script>
+<div id="loader" class="spinner spinner-lg"></div>
+
+<div id="empty" class="blank-slate-pf">
+  <div class="blank-slate-pf-icon">
+    <span class="pficon fa fa-cogs"></span>
+  </div>
+  <h1 i18n="dashboard_empty_title">
+    Ejabberd is disabled
+  </h1>
+  <div class="blank-slate-pf-main-action">
+    <button class="btn btn-primary btn-lg" i18n="dashboard_empty_action_btn" id="btn_configure">Configure Ejabberd</button>
+  </div>
+</div>
+
+<div id="content">
+    <div class="stats-container card-pf-utilization-details">
+        <span class="card-pf-utilization-card-details-count" id="stats-uptime">0</span>
+        <span class="card-pf-utilization-card-details-description">
+            <span class="card-pf-utilization-card-details-line-2 stats-text" i18n="dashboard_stats_uptime">Uptime seconds</span>
+        </span>
+    </div>
+    
+    <h2 i18n="dashboard_users_header">Users status</h2>
+    <div class="stats-container card-pf-utilization-details">
+        <span class="card-pf-utilization-card-details-count" id="stats-registered">0</span>
+        <span class="card-pf-utilization-card-details-description">
+            <span class="card-pf-utilization-card-details-line-2 stats-text" i18n="dashboard_stats_registered">Registered</span>
+        </span>
+    </div>
+    <div class="stats-container card-pf-utilization-details">
+        <span class="card-pf-utilization-card-details-count" id="stats-online">0</span>
+        <span class="card-pf-utilization-card-details-description">
+            <span class="card-pf-utilization-card-details-line-2 stats-text" i18n="dashboard_stats_online">Online</span>
+        </span>
+    </div>
+    
+    <h2 i18n="dashboard_s2s_header">Federated servers connections</h2>
+    <div class="stats-container card-pf-utilization-details">
+        <span class="card-pf-utilization-card-details-count" id="stats-s2sin">0</span>
+        <span class="card-pf-utilization-card-details-description">
+            <span class="card-pf-utilization-card-details-line-2 stats-text" i18n="dashboard_stats_s2sin">Incoming</span>
+        </span>
+    </div>
+    <div class="stats-container card-pf-utilization-details">
+        <span class="card-pf-utilization-card-details-count" id="stats-s2sout">0</span>
+        <span class="card-pf-utilization-card-details-description">
+            <span class="card-pf-utilization-card-details-line-2 stats-text" i18n="dashboard_stats_s2sout">Outgoing</span>
+        </span>
+    </div>
+</div>
+

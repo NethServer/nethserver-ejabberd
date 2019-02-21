@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2018 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+ejabberdctl="/opt/ejabberd-18.06/bin/ejabberdctl"
+
+configuration="$(/sbin/e-smith/config getjson ejabberd)"
+
+registered="$($ejabberdctl stats registeredusers)"
+online="$($ejabberdctl stats onlineusers)"
+uptime="$($ejabberdctl stats uptimeseconds)"
+s2sout="$($ejabberdctl outgoing_s2s_number)"
+s2sin="$($ejabberdctl incoming_s2s_number)"
+status="$(printf '{"registered":%d,"online":%d,"uptime":%d,"s2sin":%d,"s2sout":%d}' "${registered:-0}" "${online:-0}" "${uptime:-0}" "${s2sin:-0}" "${s2sout:-0}")"
+
+printf '{"configuration":%s,"status":%s}' "${configuration:-\{\}}" "${status:-\{\}}"
+
+

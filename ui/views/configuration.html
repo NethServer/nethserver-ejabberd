@@ -1,0 +1,92 @@
+<h1 i18n="menu_configuration">Configuration</h1>
+
+<div id="loader" class="spinner spinner-lg"></div>
+<div id="content">
+    <form class="form-horizontal" role="form">
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="config-service-switch" i18n="configuration_service_switch_label">
+                Enable Ejabberd
+            </label>
+            <div class="col-sm-10">
+                <input class="bootstrap-switch" id="config-service-switch" type="checkbox" checked>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="config-webadmin-switch"> <span i18n="configuration_webadmin_switch_label">Enable web administration interface</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-offset-2 col-sm-10 pdc-switch-observer" data-pdc-switch="config-webadmin-switch">
+              <div class="alert alert-info">
+                  <span class="pficon pficon-info"></span>
+                  <strong i18n="configuration_webadminwarn_label">Web administration interface URL</strong>
+                  <a href="#" class="alert-link" id="configuration-webadmin-url" target="_blank">http://here:5280/admin</a>
+                  <br/>
+                  <span i18n="configuration_webadmininfo_label">Access is granted to members of the "jabberadmins" group</span>
+               </div>
+          </div>
+        </div>
+
+        <fieldset class="fields-section-pf" id="config-advanced-options">
+            <legend class="fields-section-header-pf" aria-expanded="false">
+              <span class="fa fa-angle-right field-section-toggle-pf"></span>
+              <a href="#config-advanced-options" class="field-section-toggle-pf" i18n="configuration_advanced_label">Advanced Options</a>
+            </legend>
+            <div class="form-group hidden">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" id="config-federation-switch"> <span i18n="configuration_federation_label">Enable federation (s2s)</span>
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group hidden">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" id="config-archive-switch"> <span i18n="configuration_archive_label">Enable Message Archive Management (mod_mam)</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="progressive-disclosure-container pdc-switch-observer" data-pdc-switch="config-archive-switch">
+                        <span class="checkbox inline">
+                            <label>
+                                <input type="checkbox" id="config-retention-switch"> 
+                                <span i18n="configuration_retention_label">Clean messages older than</span>
+                             </label>
+                        </span>
+                        <input class="bootstrap-touchspin inline" id="config-retention-value" type="text" value="" >
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group hidden">
+                <div class="col-sm-12" i18n="configuration_shaper_title">File transfer speed (bytes/second)</div>
+            </div>
+
+            <div class="form-group hidden">
+              <label class="col-sm-2 control-label" for="config-shaperfast-text" i18n="configuration_shaperfast_label">Maximum speed</label>
+              <div class="col-sm-2">
+                <input type="text" id="config-shaperfast-text" class="form-control"></div>
+            </div>
+            <div class="form-group hidden">
+              <label class="col-sm-2 control-label" for="config-shapernormal-text" i18n="configuration_shapernormal_label">Normal speed</label>
+              <div class="col-sm-2">
+                <input type="text" id="config-shapernormal-text" class="form-control"></div>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary" type="submit" i18n="configuration_submit_btn">Save</button>
+            </div>
+        </div>
+      </form>
+</div>
