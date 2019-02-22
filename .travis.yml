@@ -26,7 +26,8 @@ env:
         "
 
 script: >
-    docker run -ti --name makerpms ${EVARS}
+    ./prep-sources
+    && docker run -ti --name makerpms ${EVARS}
     --hostname b${TRAVIS_BUILD_NUMBER}.nethserver.org
     --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} makerpms-travis -s *.spec
     && docker commit makerpms nethserver/build
