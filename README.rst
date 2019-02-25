@@ -16,6 +16,8 @@ When used with AD backend, following limitations apply:
 * the shared roster doesn't support groups
 * the shared roster displays the list of user names (not full names)
 
+See also the Server Manager UI API documentation: https://github.com/NethServer/nethserver-ejabberd/blob/master/UI-API.md
+
 Configuration
 =============
 
