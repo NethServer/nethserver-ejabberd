@@ -1,5 +1,11 @@
 ((function($){
 
+    var LANG_OBJ = {};
+
+    function _(string) {
+        return LANG_OBJ[string];
+    }
+
     function applyTranslations() {
         $('#app-views [i18n]').each(function () {
             $(this).text(_($(this).attr('i18n')))
@@ -370,7 +376,8 @@
 
     });
 
-    $(document).on("nethserver-loaded", function () {
+    nethserver.fetchTranslatedStrings(function (data) {
+        LANG_OBJ = data;
         app.run('#/');
     });
 
