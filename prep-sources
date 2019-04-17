@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Prepare source for RPM build
+tarball=nethserver-ejabberd-ui.tar.gz
+bdir=$(mktemp -d -p .)
+trap "rm -rf ${bdir}" EXIT
 
-# download langs from transifex
-
-# tar directory
-cd ui; tar cvzf ../nethserver-ejabberd-ui.tar.gz *
+cp -a ui/* ${bdir}
+gzip ${bdir}/i18n/language.json
+tar -C ${bdir} -c -z -f ${tarball} . && echo "[INFO] created ${tarball}"
