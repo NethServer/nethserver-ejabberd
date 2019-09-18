@@ -1,0 +1,10 @@
+#
+# nsapi_nethserver_ejabberd
+#
+
+Cmnd_Alias NSAPI_NETHSERVER_EJABBERD = \
+    /usr/libexec/nethserver/api/nethserver-ejabberd/read, \
+    /usr/libexec/nethserver/api/nethserver-ejabberd/update, \
+    /usr/libexec/nethserver/api/nethserver-ejabberd/validate
+
+Defaults!NSAPI_NETHSERVER_EJABBERD !requiretty

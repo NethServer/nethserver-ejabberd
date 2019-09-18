@@ -39,7 +39,9 @@ cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
 
 
-%{genfilelist} %{buildroot} > %{name}-%{version}-%{release}-filelist
+%{genfilelist} \
+    --file /etc/sudoers.d/50_nsapi_nethserver_ejabberd 'attr(0440,root,root)' \
+    %{buildroot} > %{name}-%{version}-%{release}-filelist
 mkdir -p %{buildroot}/%{_localstatedir}/log/ejabberd
 mkdir -p %{buildroot}/%{_sysconfdir}/ejabberd
 mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
