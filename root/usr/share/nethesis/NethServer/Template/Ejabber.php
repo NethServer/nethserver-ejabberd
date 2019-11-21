@@ -2,7 +2,7 @@
 
 echo $view->header()->setAttribute('template', $T('Ejabber_Title'));
 
-//Retrieve the  ejabberd URL
+//Retrieve the ejabberd URL
 $host = explode(':',$_SERVER['HTTP_HOST']);
 $url = htmlspecialchars("https://$host[0]:5280/admin/");
 
