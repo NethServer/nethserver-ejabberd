@@ -1,6 +1,6 @@
 <?php
 
-echo $view->header()->setAttribute('template', $T('Ejabber_Title'));
+echo $view->header()->setAttribute('template', $T('Ejabberd_Title'));
 
 //Retrieve the ejabberd URL
 $host = explode(':',$_SERVER['HTTP_HOST']);
