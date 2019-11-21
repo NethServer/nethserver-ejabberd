@@ -27,7 +27,7 @@ use Nethgui\System\PlatformInterface as Validate;
  *
  * @author Giacomo Sanchietti<giacomo.sanchietti@nethesis.it>
  */
-class Ejabber extends \Nethgui\Controller\AbstractController
+class Ejabberd extends \Nethgui\Controller\AbstractController
 {
 
     protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $base)
