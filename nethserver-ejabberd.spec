@@ -18,7 +18,7 @@ Requires: ejabberd = 18.06
 Requires: nethserver-httpd
 
 %description
-NethServer configuration of ejabberd XMPP server
+NethServer integration of ejabberd XMPP server
 
 %prep
 %setup

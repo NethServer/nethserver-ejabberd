@@ -23,7 +23,7 @@
 # Test if the service is running before to restore
 /usr/bin/systemctl is-active --quiet ejabberd
 if [[ $? != 0 ]]; then
-    echo '[WARNING] Ejabberd is not running, restore is not possible'
+    echo '[WARNING] ejabberd is not running, restore is not possible'
     exit 0
 fi
 
