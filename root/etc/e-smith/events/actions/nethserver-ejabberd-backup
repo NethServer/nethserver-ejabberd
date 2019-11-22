@@ -23,7 +23,7 @@
 # Test if the service is running before to backup
 /usr/bin/systemctl is-active --quiet ejabberd
 if [[ $? != 0 ]]; then
-    echo '[WARNING] Ejabberd is not running, backup is not possible'
+    echo '[WARNING] ejabberd is not running, backup is not possible'
     exit 0
 fi
 

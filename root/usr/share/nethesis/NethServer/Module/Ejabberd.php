@@ -23,11 +23,11 @@ namespace NethServer\Module;
 use Nethgui\System\PlatformInterface as Validate;
 
 /**
- * Enable or disable ejabberd chat server
+ * Enable or disable ejabberd XMPP server
  *
  * @author Giacomo Sanchietti<giacomo.sanchietti@nethesis.it>
  */
-class Ejabber extends \Nethgui\Controller\AbstractController
+class Ejabberd extends \Nethgui\Controller\AbstractController
 {
 
     protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $base)

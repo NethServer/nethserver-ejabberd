@@ -1,6 +1,6 @@
 # nethserver-ejabberd
 
-NethServer configuration of ejabberd XMPP server
+NethServer integration of ejabberd XMPP server
 
 ## read
 
