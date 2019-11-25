@@ -1,5 +1,5 @@
 ===========
-ejabberd (XMPP)
+Chat server
 ===========
 
 The UI reference is available online at
