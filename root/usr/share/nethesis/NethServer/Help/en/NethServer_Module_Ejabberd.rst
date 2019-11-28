@@ -1,6 +1,6 @@
-===========
+================
 ejabberd (XMPP)
-===========
+================
 
 The UI reference is available online at
 

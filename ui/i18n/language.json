@@ -24,7 +24,7 @@
     "configuration_shaperfast_label": "Maximum speed",
     "configuration_shapernormal_label": "Normal speed",
     "configuration_advanced_label": "Advanced settings",
-    "configuration_archive_label": "Enable Message Archive Management (mod_mam)",
+    "configuration_archive_label": "Enable XEP-0313: Message Archive Management (mod_mam)",
     "configuration_shaper_title": "File transfer speed (bytes/second)",
     "configuration_retention_days": "days",
     "configuration_submit_btn": "Save",
