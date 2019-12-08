@@ -1,10 +1,10 @@
 <?php 
 
-$L['Ejabberd_Title'] = 'Chat server';
-$L['Ejabberd_Description'] = 'Manage chat server';
-$L['Ejabberd_Tags'] = 'chat xmpp jabber ejabberd';
-$L['status_label'] = 'Enable ejabberd chat server';
-$L['WebAdmin_label'] = 'Administration web Interface';
+$L['Ejabberd_Title'] = 'ejabberd (XMPP)';
+$L['Ejabberd_Description'] = 'Manage ejabberd XMPP server';
+$L['Ejabberd_Tags'] = 'chat xmpp ejabberd';
+$L['status_label'] = 'Enable ejabberd';
+$L['WebAdmin_label'] = 'Enable web administration interface';
 $L['Advanced_label'] = 'Advanced settings';
 $L['S2S_label'] = 'Enable XMPP Federation (S2S)';
 $L['ShaperFast_label'] = 'File transfer maximum speed (bytes/second)';
