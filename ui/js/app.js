@@ -29,11 +29,15 @@
                     success = JSON.parse(success);
                     $('#loader').hide();
                     if(success.configuration.props.status == 'enabled') {
-                        $('#stats-uptime').text(success.status['uptime']);
-                        $('#stats-registered').text(success.status['registered']);
-                        $('#stats-online').text(success.status['online']);
-                        $('#stats-s2sin').text(success.status['s2sin']);
-                        $('#stats-s2sout').text(success.status['s2sout']);
+                        $('#stats-uptime').text(secondsInHour(success.status['uptime']));
+                        $('#stats-registered').text(humanFormat(success.status['registered']));
+                        $('#stats-registered').attr('title', success.status['registered']);
+                        $('#stats-online').text(humanFormat(success.status['online']));
+                        $('#stats-online').attr('title', success.status['online']);
+                        $('#stats-s2sin').text(humanFormat(success.status['s2sin']));
+                        $('#stats-s2sin').attr('title', success.status['s2sin']);
+                        $('#stats-s2sout').text(humanFormat(success.status['s2sout']));
+                        $('#stats-s2sout').attr('title', success.status['s2sout']);
                         $('#content').show();
                     } else {
                         $('#empty').show();
@@ -355,6 +359,77 @@
             }
         );
     } // end getAbout function
+
+    function secondsInHour(value) {
+        if (!value || value.length == 0) {
+            return '-'
+        }
+
+        var ret = "";
+        let hours = parseInt(Math.floor(value / 3600));
+        let minutes = parseInt(Math.floor((value - hours * 3600) / 60));
+        let seconds = parseInt((value - (hours * 3600 + minutes * 60)) % 60);
+
+        let dHours = hours > 9 ? hours : "0" + hours;
+        let dMins = minutes > 9 ? minutes : "0" + minutes;
+        let dSecs = seconds > 9 ? seconds : "0" + seconds;
+
+        ret = dSecs + "s";
+        if (minutes) {
+            ret = dMins + "m " + ret;
+        }
+        if (hours) {
+            ret = dHours + "h " + ret;
+        }
+
+        return ret;
+    }
+
+    function humanFormat(number, decimals = false) {
+        var result;
+
+        switch (true) {
+            case number === null || number === "" || isNaN(number):
+                result = "-";
+                break;
+
+            case number >= 0 && number < 1000:
+                result = number;
+                break;
+
+            case number >= 1000 && number < Math.pow(1000, 2):
+                if (decimals) {
+                    result = Math.round(number / 1000 * 10) / 10 + " K";
+                } else {
+                    result = Math.round(number / 1000) + " K";
+                }
+                break;
+
+            case number >= Math.pow(1000, 2) && number < Math.pow(1000, 3):
+                if (decimals) {
+                    result = Math.round(number / Math.pow(1000, 2) * 10) / 10 + " M";
+                } else {
+                    result = Math.round(number / Math.pow(1000, 2)) + " M";
+                }
+                break;
+
+            case number >= Math.pow(1000, 3) && number < Math.pow(1000, 4):
+                if (decimals) {
+                    result = Math.round(number / Math.pow(1000, 3) * 10) / 10 + " B";
+                } else {
+                    result = Math.round(number / Math.pow(1000, 3)) + " B";
+                }
+                break;
+
+            default:
+                if (decimals) {
+                    result = Math.round(number / Math.pow(1000, 4) * 10) / 10 + " T";
+                } else {
+                    result = Math.round(number / Math.pow(1000, 4)) + " T";
+                }
+        }
+        return result;
+    }
 
     // define app routing
     var app = $.sammy('#app-views', function () {

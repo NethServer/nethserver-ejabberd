@@ -9,7 +9,7 @@
     "dashboard_s2s_header": "Federated servers connections",
     "dashboard_stats_registered": "Registered",
     "dashboard_stats_online": "Online",
-    "dashboard_stats_uptime": "Uptime seconds",
+    "dashboard_stats_uptime": "Uptime",
     "dashboard_empty_action_btn": "Configure",
     "dashboard_empty_title": "ejabberd is disabled",
     "dashboard_stats_s2sin": "Incoming",
