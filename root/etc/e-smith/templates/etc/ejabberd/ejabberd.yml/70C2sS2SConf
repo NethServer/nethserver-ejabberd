@@ -3,7 +3,7 @@ shaper:
   normal: {${ejabberd}{'ShaperNormal'} || '500000';}
   fast: {${ejabberd}{'ShaperFast'} || '1000000';}
 
-max_fsm_queue: 1000
+max_fsm_queue: 5000
 
 shaper_rules:
   max_user_sessions: 10
