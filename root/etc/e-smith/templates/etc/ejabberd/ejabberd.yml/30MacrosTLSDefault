@@ -15,6 +15,7 @@ define_macro:
   'TLSOPTS':
     - "no_sslv3"
   'CIPHERS': ""
+  'DHFILE': "/etc/ejabberd/dh2048.pem"
 );
 }
 }

@@ -17,6 +17,7 @@ define_macro:
     - "cipher_server_preference"
   'CIPHERS': "kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:
     +kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!SSLv3:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES"
+  'DHFILE': "/etc/ejabberd/dh2048.pem"
 );
 }
 }
