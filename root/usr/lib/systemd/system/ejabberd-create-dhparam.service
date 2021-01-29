@@ -1,0 +1,6 @@
+[Unit]
+Description=Create the dhparam group for ejabberd
+
+[Service]
+Type=simple
+ExecStart=/usr/libexec/nethserver/ejabberd-create-dhparam

@@ -1,6 +1,7 @@
 [Unit]
 Description=ejabberd XMPP Server
 After=network.target
+Wants=ejabberd-create-dhparam.service
 
 [Service]
 Type=forking
