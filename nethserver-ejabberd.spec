@@ -61,6 +61,8 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd/upload
 %attr(0755,root,root) %{_sysconfdir}/cron.daily/ejabberd-purge-mod_mam-database
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/nethserver/ejabberd
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/nethserver/ejabberd/upload
+%config(noreplace) %attr(0440,root,ejabberd) /etc/ejabberd/dh2048.pem
+%attr(0755,root,root) /usr/libexec/nethserver/ejabberd-create-dhparam
 
 %post
 %systemd_post ejabberd.service
