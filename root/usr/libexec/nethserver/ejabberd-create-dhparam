@@ -26,6 +26,11 @@
 if ! /usr/bin/grep -q 'MIIBCAKCAQEAuOOxlQk6szIFHw' /etc/ejabberd/dh2048.pem; then
     exit 0
 fi
+
+# fix unable to write 'random state' 
+# https://bugzilla.redhat.com/show_bug.cgi?id=1256427
+export RANDFILE=$OPENSHIFT_DATA_DIR/.rnd
+
 tmpfile=$(mktemp /tmp/ejabberd-create-dhparam.XXXXXXX)
 trap "/usr/bin/rm -f ${tmpfile}" EXIT
 
