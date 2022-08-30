@@ -120,5 +120,9 @@ event_actions($event, 'nethserver-ejabberd-backup' => 50);
 
 $event = 'post-restore-data';
 
-event_actions($event, 'nethserver-ejabberd-restore' => 50);
+event_actions($event, 
+    'nethserver-ejabberd-fix-rsync-perms' => '10',
+    'nethserver-ejabberd-restore' => '50',
+);
+
 event_services($event, 'ejabberd' => 'restart');
